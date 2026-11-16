@@ -114,6 +114,10 @@ sudo docker run -d --name cody1-web-container -p 8081:80 cody1-web
 
 브라우저에서 `http://localhost:8081`로 접속하여 웹 페이지가 정상적으로 표시되는 것을 확인했습니다.
 
+### 웹 서버 실행 결과
+
+![Nginx 웹 서버 실행 화면](screenshots/nginx-webserver.png)
+
 ## 7. Docker Bind Mount 실습
 
 Ubuntu의 `bindmount` 폴더를 Nginx 컨테이너의 웹 페이지 디렉터리에 연결했습니다.
@@ -127,6 +131,10 @@ sudo docker run -d \
 ```
 
 VS Code에서 `bindmount/index.html`을 수정하고 저장한 뒤, `http://localhost:8082`를 새로고침했습니다.
+
+### Bind Mount 실행 결과
+
+![Docker Bind Mount 실행 화면](screenshots/bindmount-result.png)
 
 **실습 결과:** 이미지를 다시 빌드하지 않아도 수정한 HTML 내용이 웹 페이지에 반영되는 것을 확인했습니다.
 
@@ -168,6 +176,10 @@ Docker Volume Test
 
 **실습 결과:** 기존 컨테이너를 삭제한 후에도 Docker Volume에 저장한 데이터가 유지되는 것을 확인했습니다.
 
+### Docker Volume 실행 결과
+
+![Docker Volume 데이터 유지 확인](screenshots/docker-volume-result.png)
+
 ## 9. Git 및 GitHub
 
 Git 저장소를 초기화하고 `main` 브랜치에서 프로젝트 파일을 관리했습니다.
@@ -205,6 +217,20 @@ git remote -v
 **문제:** 컨테이너 내부 연결 경로가 절대 경로가 아니어서 실행에 실패했습니다.
 
 **해결:** `/usr/share/nginx/html`처럼 `/`로 시작하는 절대 경로로 수정했습니다.
+
+### GitHub Push 인증 및 권한 오류
+
+**문제:** `git push` 실행 시 인증 오류와 `403 Permission denied` 오류가 발생했습니다.
+
+**원인:** GitHub는 일반 계정 비밀번호를 이용한 Git 인증을 지원하지 않으며, 처음 발급한 Personal Access Token(PAT)에 저장소 쓰기 권한이 없었습니다.
+
+**해결:**
+1. GitHub에서 Fine-grained Personal Access Token을 발급했습니다.
+2. Repository access를 `Only select repositories`로 변경하고 `cody1`을 선택했습니다.
+3. Repository permissions의 Contents 권한을 `Read and write`로 설정했습니다.
+4. 수정한 토큰으로 다시 인증하여 `git push -u origin main`을 성공적으로 실행했습니다.
+
+**결과:** README.md와 실습 파일을 GitHub 원격 저장소에 업로드했습니다.
 
 ## 11. 실습 결과 스크린샷
 
