@@ -25,6 +25,7 @@ Linux 기본 명령어와 Docker의 주요 기능을 직접 실습하고, Git과
 
 ## 3. 프로젝트 구조
 
+```text
 cody1/
 ├── README.md
 ├── .gitignore
@@ -44,7 +45,7 @@ cody1/
     ├── nginx-webserver.png
     ├── bindmount-result.png
     └── docker-volume-result.png
-    
+```
 ## 4. Linux 기본 명령어 실습
 
 ### Linux 파일 및 디렉터리 관리 실행 결과
